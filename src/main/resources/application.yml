@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+      #username: root
+      #password: example
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      authentication-database: admin
+      database: Productsdb
+      #host: localhost
+      host: ${DB_URL}
+      port: 27017
+
