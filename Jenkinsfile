@@ -15,10 +15,10 @@ pipeline {
                 sh './mvnw clean install'
             }
         }
-        stage('Test') {
-            steps {
-                sh './mvnw test'
-            }
-        }
+//         stage('Test') {
+//             steps {
+//                 sh './mvnw test'
+//             }
+//         }
     }
 }
