@@ -15,6 +15,11 @@ pipeline {
                 sh './mvnw clean install'
             }
         }
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t myrepo/webflux-demo'
+            }
+        }
 //         stage('Test') {
 //             steps {
 //                 sh './mvnw test'
