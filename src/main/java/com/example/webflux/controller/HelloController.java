@@ -16,6 +16,24 @@ public class HelloController {
     @Autowired
     private ProductRepository repository;
 
+    private static String apply(String s) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "my->data->" + s;
+    }
+
+    private static ProductDto apply(ProductDto s) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
     @GetMapping("/hello")
     public String hello() {
         long start = System.currentTimeMillis();
@@ -35,27 +53,13 @@ public class HelloController {
     @GetMapping(value = "/flux",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> flux() {
         return Flux.fromArray(new String[]{"javaboy","itboyhub","www.javaboy.org","itboyhub.com"})
-                .map(s -> {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        return "my->data->" + s;
-                    });
+                .map(HelloController::apply);
     }
 
     @GetMapping(value = "/fluxProducts",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<ProductDto> fluxProducts() {
          return repository.findAll().map(AppUtils::entityToDto)
-                .map(s -> {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return s;
-                });
+                .map(HelloController::apply);
     }
 
     private String getHelloStr() {

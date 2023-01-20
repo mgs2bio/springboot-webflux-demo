@@ -73,7 +73,11 @@ public class MonoFluxTest {
         Flux<String> flux1 = Flux.just(" {1} ","{2} ","{3} ","{4} " );
         Flux<String> flux2 = Flux.just(" |A|"," |B| "," |C| ");
         Flux.zip(flux1, flux2)
-                .map(Tuple2::getT2)
+                .map(tuple -> {
+                    System.out.println("T1:" + tuple.getT1()
+                    + "| T2:" + tuple.getT2() + ".");
+                    return tuple.getT2();
+                })
                 .subscribe(System.out::print);
     }
 
