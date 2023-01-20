@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+public class Tweet {
 
-public record Tweet(String text, String username) {
+    private String text;
+    private String username;
 }
