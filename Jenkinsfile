@@ -12,12 +12,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './mvnw clean package'
+                sh './mvnw clean install -DskipTests'
             }
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t myrepo/webflux-demo'
+                sh 'docker build -t myrepo/webflux-demo .'
             }
         }
 //         stage('Test') {
