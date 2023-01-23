@@ -84,6 +84,7 @@ public class MonoFluxTest {
                     int k = (int) (Math.random() * 10);
                     sink.next(k);
                 })
+                .take(3)
                 // 默认获取 request(Integer.MAX_VALUE)
                 .subscribe(integer -> System.out.println("Pull:" + integer));
     }
