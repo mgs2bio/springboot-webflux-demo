@@ -31,7 +31,7 @@ public class CustomerHandler {
     public Mono<ServerResponse> loadCustomer(ServerRequest request) {
         int customerId = Integer.valueOf(request.pathVariable("input"));
         Mono<Customer> customerMono = dao.getCustomers()
-                .filter(c -> c.id() == customerId)
+                .filter(c -> c.getId() == customerId)
                 .next()
                 .switchIfEmpty(Mono.error(new RuntimeException("No Customer found with id " + customerId)));
         return ServerResponse.ok()
@@ -40,7 +40,7 @@ public class CustomerHandler {
 
     public Mono<ServerResponse> saveCustomer(ServerRequest request) {
         Mono<Customer> customerMono = request.bodyToMono(Customer.class);
-        Mono<String> saveResp = customerMono.map(dto -> dto.id() + ":" + dto.name());
+        Mono<String> saveResp = customerMono.map(dto -> dto.getId() + ":" + dto.getName());
         return ServerResponse.ok()
                 .body(saveResp, String.class);
     }
