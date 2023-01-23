@@ -51,5 +51,6 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v3
       with:
+        context: .  
         push: true
         tags: mgs2bio/springboot-webflux-demo:1.0
