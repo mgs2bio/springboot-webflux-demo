@@ -1,4 +1,7 @@
 FROM openjdk:17-oracle
 MAINTAINER baeldung.com
-COPY target/springboot-webflux-demo-0.0.1-SNAPSHOT.jar springboot-webflux-demo-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/springboot-webflux-demo-0.0.1-SNAPSHOT.jar"]
+RUN groupadd -r user && useradd -r -g user user
+USER user:user
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
