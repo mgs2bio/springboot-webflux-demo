@@ -93,10 +93,6 @@ jobs:
         ref: 'master'
         token: ${{ secrets.MY_GITHUB_TOEKN }}
 
-    # Updates the image version in the deployment manifest
-    - name: Update the version
-      run: sed -i "17s/\(springboot-webflux-demo:\).*/\1${GITHUB_SHA::7}/" ./webflux-demo/springboot-webflux.yml
-
     # Commits the change
     - name: Commit files 
       run: |
