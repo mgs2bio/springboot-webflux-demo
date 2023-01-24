@@ -68,13 +68,17 @@ jobs:
       run: echo ${{ steps.vars.outputs.sha_short }}
     -
       name: Build and push
+      id: docker_build
       uses: docker/build-push-action@v3
       with:
         context: .  
         push: ${{ github.ref == 'refs/heads/master' }}
         tags: ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
+    - 
+      name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
 
-  UpdateTheVersion:
+  updateTheVersion:
     needs: build
     name: 'Update Docker image version'
     runs-on: ubuntu-latest
