@@ -79,7 +79,7 @@ jobs:
     name: 'Update Docker image version'
     runs-on: ubuntu-latest
     # Runs only when the PR has been merged
-    if: github.event.pull_request.merged
+    # if: github.event.pull_request.merged
 
     defaults:
       run:
