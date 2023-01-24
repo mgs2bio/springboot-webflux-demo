@@ -90,7 +90,7 @@ jobs:
       uses: actions/checkout@v3
       with: 
         repository: mgs2bio/argocd-ci-config.git
-        ref: 'origin/master'
+        ref: origin/master
 
     # Updates the image version in the deployment manifest
     - name: Update the version
