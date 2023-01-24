@@ -89,7 +89,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with: 
-        repository: https://github.com/mgs2bio/argocd-ci-config.git
+        repository: mgs2bio/argocd-ci-config.git
 
     # Updates the image version in the deployment manifest
     - name: Update the version
