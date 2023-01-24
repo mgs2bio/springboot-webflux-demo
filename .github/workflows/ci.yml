@@ -13,6 +13,9 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+    
+env:
+  IMAGE_NAME: mgs2bio/springboot-webflux-demo
 
 jobs:
   build:
@@ -62,4 +65,40 @@ jobs:
       with:
         context: .  
         push: true
-        tags: mgs2bio/springboot-webflux-demo:1.1
+        tags: $IMAGE_NAME:${GITHUB_SHA::7}
+
+  UpdateTheVersion:
+    needs: build
+    name: 'Update Docker image version'
+    runs-on: ubuntu-latest
+    # Runs only when the PR has been merged
+    if: github.event.pull_request.merged
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with: 
+        repository: https://github.com/mgs2bio/argocd-ci-config.git
+
+    # Updates the image version in the deployment manifest
+    - name: Update the version
+      run: sed -i "17s/\(springboot-webflux-demo:\).*/\1${GITHUB_SHA::7}/" ./webflux-demo/springboot-webflux.yml
+
+    # Commits the change
+    - name: Commit files 
+      run: |
+        git config --local user.email "ci-mgs2bio@gmail.com"
+        git config --local user.name "ci"
+        git status
+        git add ./webflux-demo
+        git commit -m "Updated the version of the Docker image"
+    # Pushes the updated file to the repo
+    - name: Push changes 
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.MY_GITHUB_TOEKN }}
+        force: true
