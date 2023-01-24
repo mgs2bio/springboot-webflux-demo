@@ -59,4 +59,4 @@ jobs:
       with:
         context: .  
         push: true
-        tags: mgs2bio/springboot-webflux-demo:1.0
+        tags: mgs2bio/springboot-webflux-demo:1.1
