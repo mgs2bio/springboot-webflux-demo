@@ -78,7 +78,7 @@ jobs:
       name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
 
-  updateTheVersion:
+  update-k8s-manifest-version:
     needs: build
     name: 'Update Docker image version'
     runs-on: ubuntu-latest
