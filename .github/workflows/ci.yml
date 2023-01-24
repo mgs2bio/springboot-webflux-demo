@@ -61,11 +61,10 @@ jobs:
     -
       name: Build and push
       uses: docker/build-push-action@v3
-      if: github.ref == 'refs/heads/master'
       with:
         context: .  
-        push: true
-        tags: ${IMAGE_NAME}:1.3
+        push: ${{ github.ref == 'refs/heads/master' }}
+        tags: mgs2bio/springboot-webflux-demo:${{ github.sha }}
 
   UpdateTheVersion:
     needs: build
