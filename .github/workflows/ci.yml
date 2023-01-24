@@ -104,8 +104,4 @@ jobs:
         git add -A
         git commit -m "Updated the version of the Docker image"
     # Pushes the updated file to the repo
-    - name: Push changes 
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.MY_GITHUB_TOEKN }}
-        force: true
+    - run: git push origin master
