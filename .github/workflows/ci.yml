@@ -64,7 +64,7 @@ jobs:
       with:
         context: .  
         push: ${{ github.ref == 'refs/heads/master' }}
-        tags: mgs2bio/springboot-webflux-demo:${{ github.sha:7 }}
+        tags: ${{ image.name }}:${{ github.sha }}
 
   UpdateTheVersion:
     needs: build
