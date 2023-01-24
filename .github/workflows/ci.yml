@@ -103,7 +103,9 @@ jobs:
         git config --local user.email "ci-mgs2bio@gmail.com"
         git config --local user.name "ci"
         git status
-        git add ./webflux-demo
+        echo ${{ github.sha }}
+        sed -i "17s/\(springboot-webflux-demo:\).*/\1${GITHUB_SHA::7}/" webflux-demo/springboot-webflux.yml
+        git add -A
         git commit -m "Updated the version of the Docker image"
     # Pushes the updated file to the repo
     - name: Push changes 
