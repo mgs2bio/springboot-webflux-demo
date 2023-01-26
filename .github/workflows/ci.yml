@@ -106,7 +106,7 @@ jobs:
         git config --local user.name "ci"
         git status
         echo ${{ github.sha }}
-        sed -i "11s/\(tag:\).*/\1${GITHUB_SHA::7}/" charts/webflux-demo/values.yml
+        sed -i "11s/\(tag:\).*/\1${GITHUB_SHA::7}/" charts/webflux-demo/values.yaml
         git add -A
         git commit -m "Updated the version of the Docker image"
     # Pushes the updated file to the repo
