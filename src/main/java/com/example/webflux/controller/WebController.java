@@ -1,6 +1,5 @@
 package com.example.webflux.controller;
 
-import com.example.webflux.dto.Person;
 import com.example.webflux.dto.Tweet;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
